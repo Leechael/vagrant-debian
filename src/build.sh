@@ -16,7 +16,7 @@ case ${argv[0]} in
     ;;
 esac
 
-VERSION="6.0.5"
+VERSION="6.0.7"
 BOX="debian-${VERSION}-${ARCH}"
 
 VBOX_APPLICATION="/Applications/VirtualBox.app"
@@ -27,7 +27,7 @@ FOLDER_ISO="${FOLDER_BASE}/iso"
 FOLDER_BUILD="${FOLDER_BASE}/build"
 FOLDER_VBOX="${FOLDER_BUILD}/vbox"
 
-DEBIAN_MIRROR="ftp.acc.umu.se"
+DEBIAN_MIRROR="mirrors.163.com"
 DEBIAN_URL="http://${DEBIAN_MIRROR}/debian-cd/${VERSION}/${ARCH}/iso-cd"
 DEBIAN_ISO_NAME="debian-${VERSION}-${ARCH}-netinst.iso"
 DEBIAN_ISO_URL="${DEBIAN_URL}/${DEBIAN_ISO_NAME}"
@@ -113,11 +113,13 @@ mkisofs -r -V "Custom Debian Install CD" -cache-inodes -quiet -J -l \
     -boot-load-size 4 -boot-info-table -o "${FOLDER_BUILD}/custom.iso" \
     "${FOLDER_BUILD}/custom"
 
+exit 0
+
 info "Creating VM..."
 VBoxManage createvm --name "${BOX}" --ostype Debian --register --basefolder "${FOLDER_VBOX}"
-    
-VBoxManage modifyvm "${BOX}" --memory 360 --boot1 dvd --boot2 disk \
-    --boot3 none --boot4 none --vram 12 --pae off --rtcuseutc on
+
+VBoxManage modifyvm "${BOX}" --memory 1024 --boot1 dvd --boot2 disk \
+    --boot3 none --boot4 none --vram 8 --pae off --rtcuseutc on
     
 VBoxManage storagectl "${BOX}" --name "IDE Controller" --add ide \
     --controller PIIX4 --hostiocache on

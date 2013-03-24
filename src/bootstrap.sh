@@ -11,8 +11,9 @@ chmod 600 /home/vagrant/.ssh/authorized_keys
 chown -R vagrant:vagrant /home/vagrant/.ssh
 
 # dotdeb.org
-echo "deb http://mirrors.ustc.edu.cn/dotdeb/packages.dotdeb.org `lsb_release -cs` all\ndeb-src http://mirrors.ustc.edu.cn/dotdeb/packages.dotdeb.org `lsb_release -cs` all" | sudo tee /etc/apt/sources.list.d/dotdeb.list
-curl --silient http://www.dotdeb.org/dotdeb.gpg | apt-key add -
+echo "deb http://mirrors.ustc.edu.cn/dotdeb/packages.dotdeb.org `lsb_release -cs` all" | sudo tee /etc/apt/sources.list.d/dotdeb.list
+echo "deb-src http://mirrors.ustc.edu.cn/dotdeb/packages.dotdeb.org `lsb_release -cs` all" | sudo tee >> /etc/apt/sources.list.d/dotdeb.list
+curl --silent http://www.dotdeb.org/dotdeb.gpg | apt-key add -
 
 # Install chef
 echo "deb http://apt.opscode.com/ `lsb_release -cs`-0.10 main" | sudo tee /etc/apt/sources.list.d/opscode.list

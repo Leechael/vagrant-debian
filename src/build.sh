@@ -113,8 +113,6 @@ mkisofs -r -V "Custom Debian Install CD" -cache-inodes -quiet -J -l \
     -boot-load-size 4 -boot-info-table -o "${FOLDER_BUILD}/custom.iso" \
     "${FOLDER_BUILD}/custom"
 
-exit 0
-
 info "Creating VM..."
 VBoxManage createvm --name "${BOX}" --ostype Debian --register --basefolder "${FOLDER_VBOX}"
 

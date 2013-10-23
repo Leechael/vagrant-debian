@@ -136,14 +136,14 @@ VBoxManage storageattach "${BOX}" --storagectl "IDE Controller" \
     --port 0 --device 0 --type dvddrive --medium "${FOLDER_BUILD}/custom.iso"
 
 info "Booting VM..."
-VBoxManage startvm "${BOX}"
+VBoxManage startvm "${BOX}" --type headless
 wait_for_shutdown
 
 info "Installing guest additions..."
 VBoxManage storageattach "${BOX}" --storagectl "IDE Controller" --port 0 \
     --device 0 --type dvddrive --medium "${VBOX_GUESTADDITIONS}"
 
-VBoxManage startvm "${BOX}"
+VBoxManage startvm "${BOX}" --type headless
 wait_for_shutdown
 
 info "Building Vagrant box..."
